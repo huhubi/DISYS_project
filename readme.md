@@ -1,10 +1,20 @@
 # Distributed Systems Semester Project
-An example setup for a Distributed Systems project. It contains five databases (PostgreSQL) with example data and a messaging queue (RabbitMQ).
+This repository contains the semester project for the Distributed Systems course at the University of Applied Sciences FH Technikum Wien from Matthias Huber, David Berger and Gregoire Bartek.
+The readme contains all necessary information for setting up the project and running it.
 
+## Architecture
+
+![architecture.png](architecture.png)
 ## Services
+
+Frontend (Java FX):
+- Calling invoice generation to endpoint http://localhost:8080/invoices/ + customerId.
+  - The customerId is stored as an String in the frontend. 
+
+Backend Services:
 - Customer Database
-	- Contains customer data (id, first name, last name)
-	- URL: localhost:30001
+       - Contains customer data (id, first name, last name)
+       - URL: localhost:30001
 - Stations Database
 	- Contains station data (id, db_url, latitude, longitude)
 	- URL: localhost:30002
@@ -16,6 +26,8 @@ An example setup for a Distributed Systems project. It contains five databases (
 - Queue
 	- URL: localhost:30003
 	- Web: localhost:30083
+
+
 
 ## Requirements
 - [Docker](https://docs.docker.com/get-docker/)
