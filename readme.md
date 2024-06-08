@@ -2,6 +2,13 @@
 This repository contains the semester project for the Distributed Systems course at the University of Applied Sciences FH Technikum Wien from Matthias Huber, David Berger and Gregoire Bartek.
 The readme contains all necessary information for setting up the project and running it.
 
+## Responsibilities
+
+- Java FX (Matthias Huber)
+- Spring Boot (Matthias Huber)
+- Messaging Queue (David Berger)
+- PDF Generation (Gregoire Bartek)
+
 ## Architecture
 
 ![architecture.png](architecture.png)
