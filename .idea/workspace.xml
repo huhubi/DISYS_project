@@ -4,7 +4,43 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="acea01ee-4bc4-4b4f-b3ee-342c61ac0a0b" name="Changes" comment="Splitting to Frontend / Backend part of project" />
+    <list default="true" id="acea01ee-4bc4-4b4f-b3ee-342c61ac0a0b" name="Changes" comment="Splitting to Frontend / Backend part of project">
+      <change afterPath="$PROJECT_DIR$/DataCollectionDispatcher/pom.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/DataCollectionReceiver/pom.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Databases/README.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Databases/customer_db/Dockerfile" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Databases/docker-compose.yml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Databases/station_1_db/Dockerfile" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Databases/station_2_db/Dockerfile" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Databases/station_3_db/Dockerfile" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Databases/stations_db/Dockerfile" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SpringBootApp/src/main/resources/db/migration/customer.sql" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SpringBootApp/src/main/resources/db/migration/station1.sql" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SpringBootApp/src/main/resources/db/migration/station2.sql" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SpringBootApp/src/main/resources/db/migration/station3.sql" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SpringBootApp/src/main/resources/db/migration/stations.sql" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/StationDataCollector/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/.mvn/wrapper/maven-wrapper.properties" beforeDir="false" afterPath="$PROJECT_DIR$/SpringBootApp/.mvn/wrapper/maven-wrapper.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/UML.png" beforeDir="false" afterPath="$PROJECT_DIR$/SpringBootApp/UML.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/SpringBootApp/docker-compose.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/mvnw" beforeDir="false" afterPath="$PROJECT_DIR$/SpringBootApp/mvnw" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/mvnw.cmd" beforeDir="false" afterPath="$PROJECT_DIR$/SpringBootApp/mvnw.cmd" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/SpringBootApp/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/src/main/java/com/fhtechnikum/project/project/ProjectApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/SpringBootApp/src/main/java/com/fhtechnikum/project/project/ProjectApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/src/main/java/com/fhtechnikum/project/project/RESTAPI.java" beforeDir="false" afterPath="$PROJECT_DIR$/SpringBootApp/src/main/java/com/fhtechnikum/project/project/RESTAPI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/src/main/java/com/fhtechnikum/project/project/SendMessage.java" beforeDir="false" afterPath="$PROJECT_DIR$/SpringBootApp/src/main/java/com/fhtechnikum/project/project/SendMessage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/SpringBootApp/src/main/resources/application.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/src/main/resources/db/migration/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/SpringBootApp/src/main/resources/db/migration/Dockerfile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/src/main/resources/db/migration/customer.sql" beforeDir="false" afterPath="$PROJECT_DIR$/Databases/customer_db/init.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/src/main/resources/db/migration/station1.sql" beforeDir="false" afterPath="$PROJECT_DIR$/Databases/station_1_db/init.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/src/main/resources/db/migration/station2.sql" beforeDir="false" afterPath="$PROJECT_DIR$/Databases/station_2_db/init.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/src/main/resources/db/migration/station3.sql" beforeDir="false" afterPath="$PROJECT_DIR$/Databases/station_3_db/init.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/src/main/resources/db/migration/stations.sql" beforeDir="false" afterPath="$PROJECT_DIR$/Databases/stations_db/init.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/src/test/java/com/fhtechnikum/project/project/ProjectApplicationTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/SpringBootApp/src/test/java/com/fhtechnikum/project/project/ProjectApplicationTests.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Frontend/FuelStationUI/.gitignore" beforeDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -29,12 +65,16 @@
   <component name="GitToolBoxStore">
     <option name="projectConfigVersion" value="5" />
   </component>
-  <component name="GithubPullRequestsUISettings">{
-  &quot;selectedUrlAndAccountId&quot;: {
-    &quot;url&quot;: &quot;https://github.com/huhubi/DISYS_project.git&quot;,
-    &quot;accountId&quot;: &quot;18e19a37-06a8-43b0-9a96-b6ff05c770b0&quot;
+  <component name="GithubPullRequestsUISettings"><![CDATA[{
+  "selectedUrlAndAccountId": {
+    "url": "git@github.com:huhubi/DISYS_project.git",
+    "accountId": "62515ee6-38c5-4aa2-a7a3-32b7d36d9d3f"
   }
-}</component>
+}]]></component>
+  <component name="KubernetesApiPersistence"><![CDATA[{}]]></component>
+  <component name="KubernetesApiProvider"><![CDATA[{
+  "isMigrated": true
+}]]></component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
@@ -49,7 +89,9 @@
   &quot;associatedIndex&quot;: 1
 }</component>
   <component name="ProjectId" id="2fjnQKubZe9oe6ptIWeTTRZb9qP" />
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="autoscrollToSource" value="true" />
     <option name="hideEmptyMiddlePackages" value="true" />
@@ -58,12 +100,14 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "ASKED_ADD_EXTERNAL_FILES": "true",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "git-widget-placeholder": "master",
     "ignore.virus.scanning.warn.message": "true",
+    "ignore_missing_gitignore": "true",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/Hubi/Desktop/DISYS_project/project/Backend",
+    "last_opened_file_path": "/Users/davidberger/data/fh_technikum_wien/wirtschaftsinformatik/sem4/DISYS/DISYS_project",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -77,6 +121,7 @@
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$" />
       <recent name="$PROJECT_DIR$/src/main/resources/db/migration" />
     </key>
     <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
@@ -98,8 +143,8 @@
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-jdk-9f38398b9061-39b83d9b5494-intellij.indexing.shared.core-IU-241.15989.150" />
-        <option value="bundled-js-predefined-1d06a55b98c1-91d5c284f522-JavaScript-IU-241.15989.150" />
+        <option value="bundled-jdk-9f38398b9061-39b83d9b5494-intellij.indexing.shared.core-IU-241.18034.62" />
+        <option value="bundled-js-predefined-1d06a55b98c1-0b3e54e931b4-JavaScript-IU-241.18034.62" />
       </set>
     </attachedChunks>
   </component>
@@ -125,6 +170,7 @@
       <workItem from="1716042942427" duration="20000" />
       <workItem from="1716043198942" duration="29000" />
       <workItem from="1716043299482" duration="9000" />
+      <workItem from="1718994998471" duration="2686000" />
     </task>
     <task id="LOCAL-00001" summary="Splitting to Frontend / Backend part of project">
       <option name="closed" value="true" />
@@ -141,6 +187,7 @@
     <option name="version" value="3" />
   </component>
   <component name="VcsManagerConfiguration">
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
     <MESSAGE value="Splitting to Frontend / Backend part of project" />
     <option name="LAST_COMMIT_MESSAGE" value="Splitting to Frontend / Backend part of project" />
   </component>

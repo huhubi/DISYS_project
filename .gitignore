@@ -549,6 +549,3 @@ out/
 
 ### VS Code ###
 .vscode/
-
-### Certificates ###
-./BACK-END/cinemagic/src/main/resources/certificates/*
