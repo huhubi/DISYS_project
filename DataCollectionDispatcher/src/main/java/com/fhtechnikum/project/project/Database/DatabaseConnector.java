@@ -1,6 +1,7 @@
 package com.fhtechnikum.project.project.Database;
 
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.sql.Connection;
@@ -19,13 +20,21 @@ public class DatabaseConnector {
 
     private Connection connection;
 
-    public void connect(String url, String username, String password) {
+    @Autowired
+    private DatabaseConfig databaseConfig;
+
+    public void connect(String databaseKey) {
+        DatabaseConfig.DataSourceProperties properties = databaseConfig.getDatasources().get(databaseKey);
+        if (properties == null) {
+            log.error("No datasource configuration found for key: {}", databaseKey);
+            return;
+        }
         try {
             Class.forName("org.postgresql.Driver");
-            connection = DriverManager.getConnection(url, username, password);
-            log.info("Connected to the PostgreSQL server successfully.");
+            connection = DriverManager.getConnection(properties.getUrl(), properties.getUsername(), properties.getPassword());
+            log.info("Connected to the PostgreSQL server {} successfully.", databaseKey);
         } catch (Exception e) {
-            log.error("Connection to the PostgreSQL server failed: {}", e.getMessage());
+            log.error("Connection to the PostgreSQL server {} failed: {}", databaseKey, e.getMessage());
         }
     }
 
@@ -48,5 +57,9 @@ public class DatabaseConnector {
             log.error("SQL query execution failed: {}", e.getMessage());
             return null;
         }
+    }
+
+    public Connection getConnection() {
+        return connection;
     }
 }

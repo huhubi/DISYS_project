@@ -12,11 +12,7 @@ import java.util.Map;
 @ConfigurationProperties(prefix = "spring.datasource")
 public class DatabaseConfig {
 
-    private Map<String, DataSourceProperties> customer;
-    private Map<String, DataSourceProperties> stations;
-    private Map<String, DataSourceProperties> station1;
-    private Map<String, DataSourceProperties> station2;
-    private Map<String, DataSourceProperties> station3;
+    private Map<String, DataSourceProperties> datasources;
 
     @Data
     public static class DataSourceProperties {
