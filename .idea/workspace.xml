@@ -4,7 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="acea01ee-4bc4-4b4f-b3ee-342c61ac0a0b" name="Changes" comment="Splitting to Frontend / Backend part of project" />
+    <list default="true" id="acea01ee-4bc4-4b4f-b3ee-342c61ac0a0b" name="Changes" comment="Splitting to Frontend / Backend part of project">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MessagingQueue/pom.xml" beforeDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -67,10 +70,11 @@
     "ASKED_ADD_EXTERNAL_FILES": "true",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
+    "git-widget-placeholder": "master",
     "ignore.virus.scanning.warn.message": "true",
     "ignore_missing_gitignore": "true",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "/Users/davidberger/data/fh_technikum_wien/wirtschaftsinformatik/sem4/DISYS/DISYS_project",
+    "last_opened_file_path": "/Users/gregoirebartek/Desktop/FH/4Semester/DisSys/final2/DISYS_project",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -103,14 +107,6 @@
       </method>
     </configuration>
   </component>
-  <component name="SharedIndexes">
-    <attachedChunks>
-      <set>
-        <option value="bundled-jdk-9f38398b9061-39b83d9b5494-intellij.indexing.shared.core-IU-241.18034.62" />
-        <option value="bundled-js-predefined-1d06a55b98c1-0b3e54e931b4-JavaScript-IU-241.18034.62" />
-      </set>
-    </attachedChunks>
-  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -137,6 +133,7 @@
       <workItem from="1719069308608" duration="73000" />
       <workItem from="1719069398316" duration="73000" />
       <workItem from="1719088989962" duration="78000" />
+      <workItem from="1719090066783" duration="634000" />
     </task>
     <task id="LOCAL-00001" summary="Splitting to Frontend / Backend part of project">
       <option name="closed" value="true" />
