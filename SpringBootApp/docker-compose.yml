@@ -53,6 +53,12 @@ services:
 
   queue:
     image: rabbitmq:management-alpine
+    hostname: 'rabbitmq'
+    environment:
+      - 'RABBITMQ_DEFAULT_PASS=guest'
+      - 'RABBITMQ_DEFAULT_USER=guest'
     ports:
+      # AMQP protocol port
       - '30003:5672'
+      - # RabbitMQ Management console
       - '30083:15672'
