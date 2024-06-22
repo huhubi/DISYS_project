@@ -1,0 +1,42 @@
+spring:
+  application:
+    name: project
+
+  datasource:
+    customer:
+      url: jdbc:postgresql://localhost:30001/customerdb
+      username: postgres
+      password: postgres
+    stations:
+      url: jdbc:postgresql://localhost:30002/stationsdb
+      username: postgres
+      password: postgres
+    station1:
+      url: jdbc:postgresql://localhost:30011/station1db
+      username: postgres
+      password: postgres
+    station2:
+      url: jdbc:postgresql://localhost:30012/station2db
+      username: postgres
+      password: postgres
+    station3:
+      url: jdbc:postgresql://localhost:30013/station3db
+      username: postgres
+      password: postgres
+
+  flyway:
+    customer:
+      locations: classpath:db/migration/customer
+      baseline-on-migrate: true
+    stations:
+      locations: classpath:db/migration/stations
+      baseline-on-migrate: true
+    station1:
+      locations: classpath:db/migration/station1
+      baseline-on-migrate: true
+    station2:
+      locations: classpath:db/migration/station2
+      baseline-on-migrate: true
+    station3:
+      locations: classpath:db/migration/station3
+      baseline-on-migrate: true
