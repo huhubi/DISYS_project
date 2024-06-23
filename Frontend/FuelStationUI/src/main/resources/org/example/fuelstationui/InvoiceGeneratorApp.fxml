@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.cell.PropertyValueFactory?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+
+<BorderPane xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.fuelstationui.InvoiceGeneratorController">
+  <top>
+    <HBox alignment="CENTER" spacing="10">
+      <BorderPane.margin>
+        <Insets bottom="25.0" left="25.0" right="25.0" top="25.0" />
+      </BorderPane.margin>
+      <TextField fx:id="customerIdField" promptText="Customer ID" />
+      <Button fx:id="generateInvoiceBtn" onAction="#onClickGenerateInvoice" text="Generate Invoice" />
+    </HBox>
+  </top>
+
+  <center>
+    <TableView fx:id="invoiceTable">
+      <columns>
+        <TableColumn fx:id="customerIdColumn" prefWidth="100" text="Customer ID">
+          <cellValueFactory>
+            <PropertyValueFactory property="customerId" />
+          </cellValueFactory>
+        </TableColumn>
+        <TableColumn fx:id="viewInvoiceColumn" prefWidth="100" text="View Invoice">
+          <cellValueFactory>
+            <PropertyValueFactory property="viewInvoiceButton" />
+          </cellValueFactory>
+        </TableColumn>
+      </columns>
+    </TableView>
+  </center>
+
+</BorderPane>

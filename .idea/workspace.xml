@@ -5,8 +5,17 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="acea01ee-4bc4-4b4f-b3ee-342c61ac0a0b" name="Changes" comment="Splitting to Frontend / Backend part of project">
+      <change afterPath="$PROJECT_DIR$/Frontend/FuelStationUI/src/main/java/org/example/fuelstationui/InvoiceGeneratorApp.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Frontend/FuelStationUI/src/main/java/org/example/fuelstationui/InvoiceGeneratorController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Frontend/FuelStationUI/src/main/java/org/example/fuelstationui/model/Invoice.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Frontend/FuelStationUI/src/main/java/org/example/fuelstationui/service/InvoiceGeneratorService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Frontend/FuelStationUI/src/main/resources/org/example/fuelstationui/InvoiceGeneratorApp.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Frontend/FuelStationUI/src/test/java/org/example/fuelstationui/model/InvoiceTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/readme.md" beforeDir="false" afterPath="$PROJECT_DIR$/readme.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Frontend/FuelStationUI/src/main/java/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/FuelStationUI/src/main/java/module-info.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Frontend/FuelStationUI/src/main/java/org/example/fuelstationui/MainUIApp.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Frontend/FuelStationUI/src/main/java/org/example/fuelstationui/MainViewController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Frontend/FuelStationUI/src/main/resources/org/example/fuelstationui/FuelStationUI.fxml" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -75,7 +84,7 @@
     "ignore.virus.scanning.warn.message": "true",
     "ignore_missing_gitignore": "true",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "/Users/gregoirebartek/Desktop/FH/4Semester/DisSys/final2/DISYS_project",
+    "last_opened_file_path": "C:/Users/Hubi/Desktop/DISYS_project/Frontend/FuelStationUI",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -162,6 +171,7 @@
       <workItem from="1719088989962" duration="78000" />
       <workItem from="1719090066783" duration="634000" />
       <workItem from="1719143152358" duration="1796000" />
+      <workItem from="1719151164036" duration="786000" />
     </task>
     <task id="LOCAL-00001" summary="Splitting to Frontend / Backend part of project">
       <option name="closed" value="true" />
