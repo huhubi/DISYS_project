@@ -4,8 +4,15 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="acea01ee-4bc4-4b4f-b3ee-342c61ac0a0b" name="Changes" comment="Refactoring to meet requirements">
+    <list default="true" id="acea01ee-4bc4-4b4f-b3ee-342c61ac0a0b" name="Changes" comment="Fixed issue with Spring Boot starting up">
+      <change afterPath="$PROJECT_DIR$/Frontend/FuelStationUI/src/main/java/org/example/fuelstationui/MainUIApp.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Frontend/FuelStationUI/src/main/java/org/example/fuelstationui/MainViewController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Frontend/FuelStationUI/src/main/java/org/example/fuelstationui/model/Invoice.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Frontend/FuelStationUI/src/main/java/org/example/fuelstationui/service/InvoiceGeneratorService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Frontend/FuelStationUI/src/main/resources/org/example/fuelstationui/FuelStationUI.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Frontend/FuelStationUI/src/main/java/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/FuelStationUI/src/main/java/module-info.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Frontend/FuelStationUI/src/main/resources/org/example/fuelstationui/InvoiceGeneratorApp.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/FuelStationUI/src/main/resources/org/example/fuelstationui/InvoiceGeneratorApp.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -74,7 +81,7 @@
     "ignore.virus.scanning.warn.message": "true",
     "ignore_missing_gitignore": "true",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/Hubi/Desktop/DISYS_project/SpringBootApp",
+    "last_opened_file_path": "C:/Users/Hubi/Desktop/DISYS_project/StationDataCollector",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -162,6 +169,8 @@
       <workItem from="1719090066783" duration="634000" />
       <workItem from="1719143152358" duration="1796000" />
       <workItem from="1719151164036" duration="878000" />
+      <workItem from="1719155079409" duration="149000" />
+      <workItem from="1719155332703" duration="986000" />
     </task>
     <task id="LOCAL-00001" summary="Splitting to Frontend / Backend part of project">
       <option name="closed" value="true" />
@@ -179,7 +188,23 @@
       <option name="project" value="LOCAL" />
       <updated>1719152276825</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="Fixed issue with Spring Boot starting up">
+      <option name="closed" value="true" />
+      <created>1719155171097</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1719155171097</updated>
+    </task>
+    <task id="LOCAL-00004" summary="Fixed issue with Spring Boot starting up">
+      <option name="closed" value="true" />
+      <created>1719155214863</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1719155214863</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -190,6 +215,7 @@
     <MESSAGE value="Splitting to Frontend / Backend part of project" />
     <MESSAGE value="Splitting to Frontend Refactoring to meet requirements" />
     <MESSAGE value="Refactoring to meet requirements" />
-    <option name="LAST_COMMIT_MESSAGE" value="Refactoring to meet requirements" />
+    <MESSAGE value="Fixed issue with Spring Boot starting up" />
+    <option name="LAST_COMMIT_MESSAGE" value="Fixed issue with Spring Boot starting up" />
   </component>
 </project>
