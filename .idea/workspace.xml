@@ -4,18 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="acea01ee-4bc4-4b4f-b3ee-342c61ac0a0b" name="Changes" comment="Splitting to Frontend / Backend part of project">
-      <change afterPath="$PROJECT_DIR$/Frontend/FuelStationUI/src/main/java/org/example/fuelstationui/InvoiceGeneratorApp.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Frontend/FuelStationUI/src/main/java/org/example/fuelstationui/InvoiceGeneratorController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Frontend/FuelStationUI/src/main/java/org/example/fuelstationui/model/Invoice.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Frontend/FuelStationUI/src/main/java/org/example/fuelstationui/service/InvoiceGeneratorService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Frontend/FuelStationUI/src/main/resources/org/example/fuelstationui/InvoiceGeneratorApp.fxml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Frontend/FuelStationUI/src/test/java/org/example/fuelstationui/model/InvoiceTest.java" afterDir="false" />
+    <list default="true" id="acea01ee-4bc4-4b4f-b3ee-342c61ac0a0b" name="Changes" comment="Refactoring to meet requirements">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Frontend/FuelStationUI/src/main/java/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/FuelStationUI/src/main/java/module-info.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Frontend/FuelStationUI/src/main/java/org/example/fuelstationui/MainUIApp.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Frontend/FuelStationUI/src/main/java/org/example/fuelstationui/MainViewController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Frontend/FuelStationUI/src/main/resources/org/example/fuelstationui/FuelStationUI.fxml" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -84,7 +74,7 @@
     "ignore.virus.scanning.warn.message": "true",
     "ignore_missing_gitignore": "true",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/Hubi/Desktop/DISYS_project/Frontend/FuelStationUI",
+    "last_opened_file_path": "C:/Users/Hubi/Desktop/DISYS_project/SpringBootApp",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -171,7 +161,7 @@
       <workItem from="1719088989962" duration="78000" />
       <workItem from="1719090066783" duration="634000" />
       <workItem from="1719143152358" duration="1796000" />
-      <workItem from="1719151164036" duration="786000" />
+      <workItem from="1719151164036" duration="878000" />
     </task>
     <task id="LOCAL-00001" summary="Splitting to Frontend / Backend part of project">
       <option name="closed" value="true" />
@@ -181,7 +171,15 @@
       <option name="project" value="LOCAL" />
       <updated>1716042593322</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Refactoring to meet requirements">
+      <option name="closed" value="true" />
+      <created>1719152276825</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1719152276825</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -190,6 +188,8 @@
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
     <MESSAGE value="Splitting to Frontend / Backend part of project" />
-    <option name="LAST_COMMIT_MESSAGE" value="Splitting to Frontend / Backend part of project" />
+    <MESSAGE value="Splitting to Frontend Refactoring to meet requirements" />
+    <MESSAGE value="Refactoring to meet requirements" />
+    <option name="LAST_COMMIT_MESSAGE" value="Refactoring to meet requirements" />
   </component>
 </project>

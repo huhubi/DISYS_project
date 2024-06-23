@@ -1,4 +1,4 @@
-package com.fhtechnikum.project.project.rabbitmq;
+package com.fhtechnikum.project.rabbitmq;
 
 import lombok.Getter;
 
