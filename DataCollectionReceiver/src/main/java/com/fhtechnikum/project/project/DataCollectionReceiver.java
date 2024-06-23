@@ -5,10 +5,9 @@ import com.fhtechnikum.project.project.model.Station;
 import com.fhtechnikum.project.project.rabbitmq.RabbitMQService;
 import com.rabbitmq.client.DeliverCallback;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
-import javax.annotation.PostConstruct;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.UUID;
@@ -16,8 +15,8 @@ import java.util.UUID;
 import static com.fhtechnikum.project.project.rabbitmq.Queues.*;
 
 @Slf4j
-@Component
 public class DataCollectionReceiver {
+    private static DataCollectionReceiver instance;
     private final RabbitMQService dispatcherReceiverQueue;
     private final RabbitMQService collectorReceiverQueue;
     private final RabbitMQService receiverPdfQueue;
@@ -25,7 +24,7 @@ public class DataCollectionReceiver {
     private boolean fromDispatcherReceived = false;
     private boolean fromCollectorReceived = false;
 
-    @Autowired
+
     public DataCollectionReceiver(RabbitMQService dispatcherReceiverQueue,
                                   RabbitMQService collectorReceiverQueue,
                                   RabbitMQService receiverPdfQueue) {
@@ -34,9 +33,22 @@ public class DataCollectionReceiver {
         this.receiverPdfQueue = receiverPdfQueue;
     }
 
-    @PostConstruct
     public void init() {
         receiveDataCollectionJob();
+    }
+
+    public static void main(String[] args) {
+        // Initialize the Spring ApplicationContext
+        ApplicationContext context = new AnnotationConfigApplicationContext("com.fhtechnikum.project.project.rabbitmq");
+
+        // Get the RabbitMQService instances from the context
+        RabbitMQService dispatcherReceiverQueue = context.getBean("dataCollectionDispatcherQueue", RabbitMQService.class);
+        RabbitMQService collectorReceiverQueue = context.getBean("stationDataCollectorQueue", RabbitMQService.class);
+        RabbitMQService receiverPdfQueue = context.getBean("pdfGeneratorQueue", RabbitMQService.class);
+
+        // Initialize the DataCollectionReceiver instance
+        DataCollectionReceiver dataCollectionReceiver = new DataCollectionReceiver(dispatcherReceiverQueue, collectorReceiverQueue, receiverPdfQueue);
+        dataCollectionReceiver.init();
     }
 
     /**

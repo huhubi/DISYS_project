@@ -15,8 +15,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-//import static com.fhtechnikum.project.project.rabbitmq.Queues.COLLECTOR_RECEIVER_QUEUE;
-//import static com.fhtechnikum.project.project.rabbitmq.Queues.DISPATCHER_COLLECTOR_QUEUE;
+import static com.fhtechnikum.project.project.rabbitmq.Queues.COLLECTOR_RECEIVER_QUEUE;
+import static com.fhtechnikum.project.project.rabbitmq.Queues.DISPATCHER_COLLECTOR_QUEUE;
 
 /**
  * This class is responsible for collecting the data from the station. <br>
@@ -41,6 +41,15 @@ public class StationDataCollector {
 		this.chargeDb = chargeDb;
 		this.dispatcherCollectorQueue = dispatcherCollectorQueue;
 		this.collectorReceiverQueue = collectorReceiverQueue;
+	}
+
+	public static StationDataCollector getInstance() {
+		return new StationDataCollector(new DatabaseConnector(), new RabbitMQService(DISPATCHER_COLLECTOR_QUEUE), new RabbitMQService(COLLECTOR_RECEIVER_QUEUE));
+	}
+
+	public static void main(String[] args) {
+		StationDataCollector stationDataCollector = getInstance();
+		stationDataCollector.gatherDataForSpecificPersonSpecificCharge();
 	}
 
 	@PostConstruct
