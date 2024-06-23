@@ -114,5 +114,22 @@ If you encounter any issues or have specific questions about the project, refer 
 Feel free to contact Matthias Huber (wi22b112@technikum-wien.at) per E-Mail.
 
 For latest updates and news, visit the Github repo at [https://github.com/huhubi/DISYS_project]()
-```shell
+
+
+# Lessons Learned
+
+We encouncered a problem in our DataCollectionDispatcher where we quite dont know how to fix it.
+Although we tried totroubleshoot it with a lot of ressources, we were not able to.
+So we decided to mock the pdf generator and also implement an offline functionality in the frontend. Which first checks if there is a file saved locally and if not, it will call the Spring Boot application to use the process in the architecture mentioned above.
+For offline functionality you still need to start the docker containers to get the data from the databases.
+
+# Unit testing decisions
+
+We tried to implement unit tests for the core use cases and edge cases.
+About 3 unit tests were implemented for each compononent.
+
+# Effort
+
+We would estimate that it took about 20 hours per person to implement according to the requirements - about 60 hours in total.
+
 
