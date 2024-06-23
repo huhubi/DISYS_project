@@ -57,7 +57,7 @@ public class DataCollectionDispatcher {
 
 		// Get the RabbitMQService instances from the context
 		RabbitMQService dispatcherQueueService = context.getBean("dataCollectionDispatcherQueue", RabbitMQService.class);
-		RabbitMQService collectorQueueService = context.getBean("stationDataCollectorQueue", RabbitMQService.class);
+		RabbitMQService collectorQueueService = context.getBean("springbootAppQueue", RabbitMQService.class);
 		RabbitMQService receiverQueueService = context.getBean("dataCollectionReceiverQueue", RabbitMQService.class);
 
 		// Get the DatabaseConnector and DatabaseConfig instances from the context

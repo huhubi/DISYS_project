@@ -43,7 +43,7 @@ public class DataCollectionReceiver {
         ApplicationContext context = new AnnotationConfigApplicationContext("com.fhtechnikum.project.project.rabbitmq");
 
         // Get the RabbitMQService instances from the context
-        RabbitMQService dispatcherReceiverQueue = context.getBean("dataCollectionDispatcherQueue", RabbitMQService.class);
+        RabbitMQService dispatcherReceiverQueue = context.getBean("dataCollectionReceiverQueue", RabbitMQService.class);
         RabbitMQService collectorReceiverQueue = context.getBean("stationDataCollectorQueue", RabbitMQService.class);
         RabbitMQService receiverPdfQueue = context.getBean("pdfGeneratorQueue", RabbitMQService.class);
 
