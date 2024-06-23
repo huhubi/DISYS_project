@@ -4,6 +4,7 @@ import com.fhtechnikum.project.project.model.Invoice;
 import com.fhtechnikum.project.project.model.Station;
 import com.fhtechnikum.project.project.rabbitmq.RabbitMQService;
 import com.rabbitmq.client.DeliverCallback;
+import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
@@ -14,6 +15,7 @@ import java.util.UUID;
 
 import static com.fhtechnikum.project.project.rabbitmq.Queues.*;
 
+@Data
 @Slf4j
 public class DataCollectionReceiver {
     private final RabbitMQService dispatcherReceiverQueue;
