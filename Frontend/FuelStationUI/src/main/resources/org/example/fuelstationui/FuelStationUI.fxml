@@ -6,9 +6,9 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox alignment="CENTER" spacing="10" xmlns:fx="http://javafx.com/fxml" fx:controller="org.example.fuelstationui.MainViewController">
+<VBox alignment="CENTER" spacing="10" xmlns:fx="http://javafx.com/fxml" fx:controller="org.example.fuelstationui.InvoiceGeneratorController">
   <Label text="Generate Invoice"/>
   <TextField fx:id="customerIdField" promptText="Enter Customer ID"/>
-  <Button text="Generate Invoice" onAction="#handleGenerateInvoice"/>
+  <Button text="Generate Invoice" onAction="#handleGenerateInvoice" fx:controller="org.example.fuelstationui.InvoiceGeneratorController"/>
   <Label fx:id="statusLabel"/>
 </VBox>
