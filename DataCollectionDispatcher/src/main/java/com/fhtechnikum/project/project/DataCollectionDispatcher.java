@@ -5,10 +5,9 @@ import com.fhtechnikum.project.project.Database.DatabaseConnector;
 import com.fhtechnikum.project.project.rabbitmq.RabbitMQService;
 import com.rabbitmq.client.DeliverCallback;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
-import javax.annotation.PostConstruct;
 import java.io.IOException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -26,7 +25,6 @@ import java.util.concurrent.TimeoutException;
  */
 
 @Slf4j
-@Component
 public class DataCollectionDispatcher {
 
 	private static final String QUERY = "SELECT * FROM station";
@@ -37,7 +35,6 @@ public class DataCollectionDispatcher {
 	private final DatabaseConnector databaseConnector;
 	private final DatabaseConfig databaseConfig;
 
-	@Autowired
 	public DataCollectionDispatcher(RabbitMQService dispatcherQueueService,
 									RabbitMQService collectorQueueService,
 									RabbitMQService receiverQueueService,
@@ -50,10 +47,28 @@ public class DataCollectionDispatcher {
 		this.databaseConfig = databaseConfig;
 	}
 
-	@PostConstruct
 	public void init() {
 		dispatchDataCollectionJob();
 	}
+
+	public static void main(String[] args) {
+		// Initialize the Spring ApplicationContext
+		ApplicationContext context = new AnnotationConfigApplicationContext("com.fhtechnikum.project.project.rabbitmq", "com.fhtechnikum.project.project.Database");
+
+		// Get the RabbitMQService instances from the context
+		RabbitMQService dispatcherQueueService = context.getBean("dataCollectionDispatcherQueue", RabbitMQService.class);
+		RabbitMQService collectorQueueService = context.getBean("stationDataCollectorQueue", RabbitMQService.class);
+		RabbitMQService receiverQueueService = context.getBean("dataCollectionReceiverQueue", RabbitMQService.class);
+
+		// Get the DatabaseConnector and DatabaseConfig instances from the context
+		DatabaseConnector databaseConnector = context.getBean(DatabaseConnector.class);
+		DatabaseConfig databaseConfig = context.getBean(DatabaseConfig.class);
+
+		// Initialize the DataCollectionDispatcher instance
+		DataCollectionDispatcher dataCollectionDispatcher = new DataCollectionDispatcher(dispatcherQueueService, collectorQueueService, receiverQueueService, databaseConnector, databaseConfig);
+		dataCollectionDispatcher.init();
+	}
+
 
 	/**
 	 * Receives the data collection job from the queue and dispatches it to the correct data collector.
@@ -87,8 +102,8 @@ public class DataCollectionDispatcher {
 	 * @throws TimeoutException timeout while sending the message
 	 */
 	public void sendMessageForEachStation(RabbitMQService queueService, long customerId) throws IOException, TimeoutException {
-		DatabaseConfig.DataSourceProperties properties = databaseConfig.getStations().get("stations");
-		databaseConnector.connect(properties.getUrl(), properties.getUsername(), properties.getPassword());
+		DatabaseConfig.DataSourceProperties properties = databaseConfig.getDatasources().get("stations");
+		databaseConnector.connect("stations");
 		try (ResultSet resultSet = databaseConnector.executeSQLQuery(QUERY)) {
 			while (true) {
 				StationModel station = new StationModel();
