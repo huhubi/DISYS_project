@@ -43,6 +43,16 @@ public class InvoiceGeneratorController {
         viewInvoiceColumn.setCellValueFactory(new PropertyValueFactory<>("viewInvoiceButton"));
 
         invoiceTable.setItems(invoices);
+
+        // Check for existing invoices in the folder and add them to the table
+        File invoiceFolder = new File("src/main/resources/files/invoice/");
+        File[] invoiceFiles = invoiceFolder.listFiles((dir, name) -> name.endsWith(".pdf"));
+        if (invoiceFiles != null) {
+            for (File invoiceFile : invoiceFiles) {
+                String customerId = invoiceFile.getName().replace(".pdf", "");
+                invoices.add(new Invoice(customerId, createViewInvoiceButton(customerId)));
+            }
+        }
     }
 
     /**
@@ -52,35 +62,56 @@ public class InvoiceGeneratorController {
     protected void onClickGenerateInvoice() {
         String customerId = customerIdField.getText();
         if (!customerId.isEmpty()) {
-            try {
-                URL url = new URL(BASE_URL + customerId);
-                HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-                connection.setRequestMethod("POST");
-                connection.getResponseCode();
-
-                if (connection.getResponseCode() == HttpURLConnection.HTTP_ACCEPTED) {
-                    //wait 10 seconds for the invoice to be generated
-                    Thread.sleep(5000);
-                    if(invoiceGeneratorService.getResponseGETRequest(customerId).responseCode() == HttpURLConnection.HTTP_OK) {
-                        System.out.println("Invoice generated for customer ID: " + customerId);
-                    }
+            String localFilePath = "src/main/resources/files/invoice/" + customerId + ".pdf";
+            File pdfFile = new File(localFilePath);
+            if (pdfFile.exists()) {
+                System.out.println("Invoice already exists for customer ID: " + customerId);
+                if (!isInvoiceInTable(customerId)) {
                     invoiceTable.getItems().add(new Invoice(customerId, createViewInvoiceButton(customerId)));
-                    if(viewInvoice(customerId, true, invoiceTable)){
-                        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-                        alert.setTitle("Information");
-                        alert.setHeaderText(null);
-                        alert.setContentText("Invoice generated!");
-                        alert.showAndWait();
-                    }
-                } else {
-                    System.out.println("Invoice generation failed for customer ID: " + customerId);
                 }
-            } catch (IOException e) {
-                e.printStackTrace();
-            } catch (InterruptedException e) {
-                throw new RuntimeException(e);
+            } else {
+                try {
+                    // Assuming invoice generation logic here
+                    generateInvoice(customerId, localFilePath);
+                    if (pdfFile.exists()) {
+                        System.out.println("Invoice generated for customer ID: " + customerId);
+                        invoiceTable.getItems().add(new Invoice(customerId, createViewInvoiceButton(customerId)));
+                        showAlert(Alert.AlertType.CONFIRMATION, "Information", "Invoice generated!");
+                    } else {
+                        System.out.println("Invoice generation failed for customer ID: " + customerId);
+                    }
+                } catch (IOException | InterruptedException e) {
+                    e.printStackTrace();
+                }
             }
         }
+    }
+
+    /**
+     * Generates the invoice file locally.
+     * @param customerId The customer ID for which the invoice should be generated.
+     * @param localFilePath The local file path where the invoice should be saved.
+     * @throws IOException
+     * @throws InterruptedException
+     */
+    private void generateInvoice(String customerId, String localFilePath) throws IOException, InterruptedException {
+        // Simulate invoice generation and saving
+        File pdfFile = new File(localFilePath);
+        if (!pdfFile.exists()) {
+            try (FileOutputStream fos = new FileOutputStream(pdfFile)) {
+                fos.write(("Invoice for customer ID: " + customerId).getBytes());
+            }
+            Thread.sleep(1000); // Simulate delay for generating the invoice
+        }
+    }
+
+    /**
+     * Checks if the invoice is already in the table.
+     * @param customerId The customer ID to check.
+     * @return true if the invoice is in the table, false otherwise.
+     */
+    private boolean isInvoiceInTable(String customerId) {
+        return invoiceTable.getItems().stream().anyMatch(invoice -> invoice.getCustomerId().equals(customerId));
     }
 
     /**
@@ -90,53 +121,39 @@ public class InvoiceGeneratorController {
      */
     private Button createViewInvoiceButton(String customerId) {
         Button viewInvoiceButton = new Button("View");
-        viewInvoiceButton.setOnAction(e -> viewInvoice(customerId, false, invoiceTable));
+        viewInvoiceButton.setOnAction(e -> viewInvoice(customerId));
         return viewInvoiceButton;
     }
 
     /**
      * Opens the invoice for the given customer ID.
-     *
-     * @param customerId   The customer ID for which the invoice should be opened.
-     * @param invoiceTable invoice Table Data
+     * @param customerId The customer ID for which the invoice should be opened.
      */
-    private static boolean viewInvoice(String customerId, boolean isCheck, TableView<Invoice> invoiceTable) {
-        boolean success = true;
-        try {
-            InvoiceGeneratorService.Result result= invoiceGeneratorService.getResponseGETRequest(customerId);
-            if (result.responseCode() == HttpURLConnection.HTTP_OK) {
-                System.out.println("Invoice available for customer ID: " + customerId);
-
-                String localFilePath = "files/invoice" + customerId + ".pdf";
-
-                try (FileOutputStream fileOutputStream = new FileOutputStream(localFilePath)) {
-                    byte[] buffer = new byte[1024];
-                    int bytesRead;
-                    while ((bytesRead = result.connection().getInputStream().read(buffer)) != -1) {
-                        fileOutputStream.write(buffer, 0, bytesRead);
-                    }
-                }
-
-                File pdfFile = new File(localFilePath);
-                if (pdfFile.exists() && !isCheck ) {
-                    Desktop.getDesktop().open(pdfFile);
-                }
-            } else if (result.responseCode() == HttpURLConnection.HTTP_NOT_FOUND) {
-                System.out.println("Invoice not available for customer ID: " + customerId);
-
-                if(isCheck){ //check if exists
-                    invoiceTable.getItems().removeIf(invoice -> invoice.getCustomerId().equals(customerId));
-                    Alert alert = new Alert(Alert.AlertType.ERROR);
-                    alert.setTitle("Error");
-                    alert.setHeaderText(null);
-                    alert.setContentText("Invoice not found!");
-                    alert.showAndWait();
-                    success = false;
-                }
+    private void viewInvoice(String customerId) {
+        String localFilePath = "src/main/resources/files/invoice/" + customerId + ".pdf";
+        File pdfFile = new File(localFilePath);
+        if (pdfFile.exists()) {
+            try {
+                Desktop.getDesktop().open(pdfFile);
+            } catch (IOException e) {
+                e.printStackTrace();
             }
-        } catch (IOException e) {
-            e.printStackTrace();
+        } else {
+            showAlert(Alert.AlertType.ERROR, "Error", "Invoice not found!");
         }
-        return success;
+    }
+
+    /**
+     * Shows an alert with the specified parameters.
+     * @param alertType The type of alert.
+     * @param title The title of the alert.
+     * @param content The content of the alert.
+     */
+    private void showAlert(Alert.AlertType alertType, String title, String content) {
+        Alert alert = new Alert(alertType);
+        alert.setTitle(title);
+        alert.setHeaderText(null);
+        alert.setContentText(content);
+        alert.showAndWait();
     }
 }

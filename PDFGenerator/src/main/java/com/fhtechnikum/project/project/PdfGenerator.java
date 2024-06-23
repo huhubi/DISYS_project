@@ -16,7 +16,7 @@ public class PdfGenerator {
         Document document = new Document();
 
         try {
-            PdfWriter.getInstance(document, new FileOutputStream("../Frontend/FuelStationUI/src/main/resources/files/invoices/" + customer.getId() + ".pdf"));
+            PdfWriter.getInstance(document, new FileOutputStream("../Frontend/FuelStationUI/src/main/resources/files/invoice/" + customer.getId() + ".pdf"));
 
             document.open();
 
