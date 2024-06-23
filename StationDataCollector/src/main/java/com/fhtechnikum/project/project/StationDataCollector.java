@@ -4,10 +4,9 @@ import com.fhtechnikum.project.project.Database.DatabaseConnector;
 import com.fhtechnikum.project.project.rabbitmq.RabbitMQService;
 import com.rabbitmq.client.DeliverCallback;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
-import javax.annotation.PostConstruct;
 import java.io.IOException;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -15,8 +14,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.fhtechnikum.project.project.rabbitmq.Queues.COLLECTOR_RECEIVER_QUEUE;
-import static com.fhtechnikum.project.project.rabbitmq.Queues.DISPATCHER_COLLECTOR_QUEUE;
+import static com.fhtechnikum.project.project.rabbitmq.Queues.*;
 
 /**
  * This class is responsible for collecting the data from the station. <br>
@@ -27,14 +25,12 @@ import static com.fhtechnikum.project.project.rabbitmq.Queues.DISPATCHER_COLLECT
  *</i>
  */
 @Slf4j
-@Component
 public class StationDataCollector {
 	private static final String QUERY = "SELECT * FROM charge WHERE customer_id = ?";
 	private final RabbitMQService dispatcherCollectorQueue;
 	private final RabbitMQService collectorReceiverQueue;
 	private final DatabaseConnector chargeDb;
 
-	@Autowired
 	public StationDataCollector(DatabaseConnector chargeDb,
 								RabbitMQService dispatcherCollectorQueue,
 								RabbitMQService collectorReceiverQueue) {
@@ -43,19 +39,28 @@ public class StationDataCollector {
 		this.collectorReceiverQueue = collectorReceiverQueue;
 	}
 
-	public static StationDataCollector getInstance() {
-		return new StationDataCollector(new DatabaseConnector(), new RabbitMQService(DISPATCHER_COLLECTOR_QUEUE), new RabbitMQService(COLLECTOR_RECEIVER_QUEUE));
-	}
 
-	public static void main(String[] args) {
-		StationDataCollector stationDataCollector = getInstance();
-		stationDataCollector.gatherDataForSpecificPersonSpecificCharge();
-	}
-
-	@PostConstruct
 	public void init() {
 		gatherDataForSpecificPersonSpecificCharge();
 	}
+
+	public static void main(String[] args) {
+		// Initialize the Spring ApplicationContext
+		ApplicationContext context = new AnnotationConfigApplicationContext("com.fhtechnikum.project.project.rabbitmq", "com.fhtechnikum.project.project.Database");
+
+		// Get the RabbitMQService instances from the context
+		RabbitMQService dispatcherCollectorQueue = context.getBean("dataCollectionDispatcherQueue", RabbitMQService.class);
+		RabbitMQService collectorReceiverQueue = context.getBean("stationDataCollectorQueue", RabbitMQService.class);
+
+		// Get the DatabaseConnector instance from the context
+		DatabaseConnector databaseConnector = context.getBean(DatabaseConnector.class);
+
+		// Initialize the StationDataCollector instance
+		StationDataCollector stationDataCollector = new StationDataCollector(databaseConnector, dispatcherCollectorQueue, collectorReceiverQueue);
+		stationDataCollector.init();
+	}
+
+
 
 	/**
 	 * Gathers data for a specific customer from a specific charging station
