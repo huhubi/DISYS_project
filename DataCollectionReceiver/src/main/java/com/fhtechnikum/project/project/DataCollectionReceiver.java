@@ -16,7 +16,6 @@ import static com.fhtechnikum.project.project.rabbitmq.Queues.*;
 
 @Slf4j
 public class DataCollectionReceiver {
-    private static DataCollectionReceiver instance;
     private final RabbitMQService dispatcherReceiverQueue;
     private final RabbitMQService collectorReceiverQueue;
     private final RabbitMQService receiverPdfQueue;
