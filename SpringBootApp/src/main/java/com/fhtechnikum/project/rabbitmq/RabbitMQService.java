@@ -29,7 +29,7 @@ public class RabbitMQService {
     @Autowired
     public RabbitMQService(ConnectionFactory connectionFactory) {
         this.connectionFactory = connectionFactory;
-        this.queueName = Queues.SPRING_BOOT_APP.getQueueName(); // Default queue
+        this.queueName = Queues.SPRING_BOOT_APP.getQueueName(); //TODO: changes needed to queue name
     }
 
     /**
