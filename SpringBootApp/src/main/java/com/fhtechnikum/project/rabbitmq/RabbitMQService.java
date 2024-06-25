@@ -24,12 +24,10 @@ public class RabbitMQService {
     private final ConnectionFactory connectionFactory;
     private Connection connection;
     private Channel channel;
-    private String queueName;
 
     @Autowired
     public RabbitMQService(ConnectionFactory connectionFactory) {
         this.connectionFactory = connectionFactory;
-        this.queueName = Queues.SPRING_BOOT_APP.getQueueName(); //TODO: changes needed to queue name
     }
 
     /**
@@ -45,15 +43,17 @@ public class RabbitMQService {
     }
 
     /**
-     * Connect to RabbitMQ and create a queue with the specified name.
+     * Connect to RabbitMQ and create the queues.
      * @throws IOException if there's an issue creating the queue.
      * @throws TimeoutException if there's a timeout connecting to RabbitMQ.
      */
     private void connect() throws IOException, TimeoutException {
         connection = connectionFactory.createConnection();
         channel = connection.createChannel(false);
-        channel.queueDeclare(queueName, true, false, false, null);
-        log.info("Connected to RabbitMQ and declared queue: {}", queueName);
+        for (Queues queue : Queues.values()) {
+            channel.queueDeclare(queue.getQueueName(), true, false, false, null);
+            log.info("Connected to RabbitMQ and declared queue: {}", queue.getQueueName());
+        }
     }
 
     /**
@@ -75,24 +75,17 @@ public class RabbitMQService {
     }
 
     /**
-     * Send a message to the queue.
+     * Send a message to the specified queue.
      * @param message the message to send.
+     * @param queue the queue to send the message to.
      */
-    public void publishMessage(String message) {
+    public void publishMessage(String message, Queues queue) {
         try {
-            channel.basicPublish("", queueName, null, message.getBytes());
-            log.info("Sent message: {}", message);
+            channel.basicPublish("", queue.getQueueName(), null, message.getBytes());
+            log.info("Sent message to {}: {}", queue.getQueueName(), message);
         } catch (IOException e) {
-            log.error("Failed to send message to queue: {}", queueName, e);
+            log.error("Failed to send message to queue: {}", queue.getQueueName(), e);
         }
     }
-
-    /**
-     * Set the queue name dynamically.
-     * @param queue the queue enum.
-     */
-    public void setQueueName(Queues queue) {
-        this.queueName = queue.getQueueName();
-        log.info("Queue name set to: {}", queueName);
-    }
 }
+

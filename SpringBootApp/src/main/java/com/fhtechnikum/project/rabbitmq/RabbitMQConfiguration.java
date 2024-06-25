@@ -15,31 +15,10 @@ public class RabbitMQConfiguration {
         return new CachingConnectionFactory(HOST, PORT);
     }
 
-    @Bean(name = "dataCollectionDispatcherQueue")
-    public RabbitMQService dataCollectionDispatcherQueue(ConnectionFactory connectionFactory) {
-        RabbitMQService service = new RabbitMQService(connectionFactory);
-        service.setQueueName(Queues.DATA_COLLECTION_DISPATCHER);
-        return service;
-    }
-
-    @Bean(name = "stationDataCollectorQueue")
-    public RabbitMQService stationDataCollectorQueue(ConnectionFactory connectionFactory) {
-        RabbitMQService service = new RabbitMQService(connectionFactory);
-        service.setQueueName(Queues.STATION_DATA_COLLECTOR);
-        return service;
-    }
-
-    @Bean(name = "dataCollectionReceiverQueue")
-    public RabbitMQService dataCollectionReceiverQueue(ConnectionFactory connectionFactory) {
-        RabbitMQService service = new RabbitMQService(connectionFactory);
-        service.setQueueName(Queues.DATA_COLLECTION_RECEIVER);
-        return service;
-    }
-
-    @Bean(name = "pdfGeneratorQueue")
-    public RabbitMQService pdfGeneratorQueue(ConnectionFactory connectionFactory) {
-        RabbitMQService service = new RabbitMQService(connectionFactory);
-        service.setQueueName(Queues.PDF_GENERATOR);
-        return service;
+    @Bean
+    public RabbitMQService rabbitMQService(ConnectionFactory connectionFactory) {
+        return new RabbitMQService(connectionFactory);
     }
 }
+
+

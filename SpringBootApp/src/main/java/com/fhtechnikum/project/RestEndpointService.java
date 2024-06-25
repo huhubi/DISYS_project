@@ -1,12 +1,10 @@
 package com.fhtechnikum.project;
 
-
 import com.fhtechnikum.project.rabbitmq.RabbitMQService;
 import com.fhtechnikum.project.rabbitmq.Queues;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import java.io.File;
@@ -22,11 +20,11 @@ import java.nio.file.Paths;
 @Slf4j
 @Service
 public class RestEndpointService {
-    private RabbitMQService messagePublisher;
+    private RabbitMQService rabbitMQService;
 
     @Autowired
-    public RestEndpointService(@Qualifier("dataCollectionDispatcherQueue") RabbitMQService messagePublisher) {
-        this.messagePublisher = messagePublisher;
+    public RestEndpointService(RabbitMQService rabbitMQService) {
+        this.rabbitMQService = rabbitMQService;
     }
 
     /**
@@ -41,9 +39,8 @@ public class RestEndpointService {
      * @param customerId customer id for the data gathering job
      */
     public void publishDataGatheringJob(String customerId) {
-        messagePublisher.setQueueName(Queues.DATA_COLLECTION_DISPATCHER);  // Set the appropriate queue name
-        messagePublisher.initialize();
-        messagePublisher.publishMessage(customerId);
+        rabbitMQService.publishMessage(customerId, Queues.SPRING_BOOT_APP);
+        // Add more queues as needed
     }
 
     /**
@@ -81,4 +78,3 @@ public class RestEndpointService {
         }
     }
 }
-
