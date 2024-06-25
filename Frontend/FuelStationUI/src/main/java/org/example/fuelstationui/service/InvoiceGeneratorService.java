@@ -18,6 +18,9 @@ public class InvoiceGeneratorService {
     /**
      * Returns the singleton instance of the InvoiceGeneratorService.
      * @return The singleton instance of the InvoiceGeneratorService.
+     *
+     * Singleton pattern restricts the instantiation of a class and ensures that only
+     * one instance of the class exists in the Java Virtual Machine.
      */
     public static InvoiceGeneratorService getInstance() {
         if (instance == null) {

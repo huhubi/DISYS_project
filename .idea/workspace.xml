@@ -4,9 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="acea01ee-4bc4-4b4f-b3ee-342c61ac0a0b" name="Changes" comment="adapted Javafx version for mac compatibility in pom.xml">
-      <change beforePath="$PROJECT_DIR$/SpringBootApp/src/test/java/com/fhtechnikum/project/project/RestEndpointServiceTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/SpringBootApp/src/test/java/com/fhtechnikum/project/project/RestEndpointServiceTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SpringBootApp/src/test/java/com/fhtechnikum/project/project/RestEndpointTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/SpringBootApp/src/test/java/com/fhtechnikum/project/project/RestEndpointTest.java" afterDir="false" />
+    <list default="true" id="acea01ee-4bc4-4b4f-b3ee-342c61ac0a0b" name="Changes" comment="created comments for Unit tests">
+      <change beforePath="$PROJECT_DIR$/Frontend/FuelStationUI/src/main/java/org/example/fuelstationui/service/InvoiceGeneratorService.java" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/FuelStationUI/src/main/java/org/example/fuelstationui/service/InvoiceGeneratorService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Frontend/FuelStationUI/src/test/java/org/example/fuelstationui/model/InvoiceTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/FuelStationUI/src/test/java/org/example/fuelstationui/model/InvoiceTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -75,7 +75,7 @@
     "ignore.virus.scanning.warn.message": "true",
     "ignore_missing_gitignore": "true",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/Hubi/Desktop/DISYS/SpringBootApp",
+    "last_opened_file_path": "C:/Users/Hubi/Desktop/DISYS/Frontend/FuelStationUI",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -169,7 +169,7 @@
       <workItem from="1719157884067" duration="5286000" />
       <workItem from="1719161750888" duration="402000" />
       <workItem from="1719165320814" duration="1443000" />
-      <workItem from="1719310397104" duration="441000" />
+      <workItem from="1719310397104" duration="1166000" />
     </task>
     <task id="LOCAL-00001" summary="Splitting to Frontend / Backend part of project">
       <option name="closed" value="true" />
@@ -235,7 +235,15 @@
       <option name="project" value="LOCAL" />
       <updated>1719159860422</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="created comments for Unit tests">
+      <option name="closed" value="true" />
+      <created>1719310869255</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1719310869255</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -251,6 +259,7 @@
     <MESSAGE value="deleted old file" />
     <MESSAGE value="adapted Javafx version in pom.xml for compatibility" />
     <MESSAGE value="adapted Javafx version for mac compatibility in pom.xml" />
-    <option name="LAST_COMMIT_MESSAGE" value="adapted Javafx version for mac compatibility in pom.xml" />
+    <MESSAGE value="created comments for Unit tests" />
+    <option name="LAST_COMMIT_MESSAGE" value="created comments for Unit tests" />
   </component>
 </project>
