@@ -1,8 +1,8 @@
 package com.fhtechnikum.project.project;
 
-import com.fhtechnikum.project.project.Database.DatabaseConfig;
 import com.fhtechnikum.project.project.Database.DatabaseConnector;
 import com.fhtechnikum.project.project.rabbitmq.RabbitMQService;
+import com.fhtechnikum.project.project.rabbitmq.Queues;
 import com.rabbitmq.client.DeliverCallback;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.ApplicationContext;
@@ -30,21 +30,18 @@ public class DataCollectionDispatcher {
 	private static final String QUERY = "SELECT * FROM station";
 
 	private final RabbitMQService dispatcherQueueService;
-	private final RabbitMQService collectorQueueService;
 	private final RabbitMQService receiverQueueService;
+	private final RabbitMQService collectorQueueService;
 	private final DatabaseConnector databaseConnector;
-	private final DatabaseConfig databaseConfig;
 
 	public DataCollectionDispatcher(RabbitMQService dispatcherQueueService,
-									RabbitMQService collectorQueueService,
 									RabbitMQService receiverQueueService,
-									DatabaseConnector databaseConnector,
-									DatabaseConfig databaseConfig) {
+									RabbitMQService collectorQueueService,
+									DatabaseConnector databaseConnector) {
 		this.dispatcherQueueService = dispatcherQueueService;
-		this.collectorQueueService = collectorQueueService;
 		this.receiverQueueService = receiverQueueService;
+		this.collectorQueueService = collectorQueueService;
 		this.databaseConnector = databaseConnector;
-		this.databaseConfig = databaseConfig;
 	}
 
 	public void init() {
@@ -56,19 +53,17 @@ public class DataCollectionDispatcher {
 		ApplicationContext context = new AnnotationConfigApplicationContext("com.fhtechnikum.project.project.rabbitmq", "com.fhtechnikum.project.project.Database");
 
 		// Get the RabbitMQService instances from the context
-		RabbitMQService dispatcherQueueService = context.getBean("dataCollectionDispatcherQueue", RabbitMQService.class);
-		RabbitMQService collectorQueueService = context.getBean("springbootAppQueue", RabbitMQService.class);
-		RabbitMQService receiverQueueService = context.getBean("dataCollectionReceiverQueue", RabbitMQService.class);
+		RabbitMQService dispatcherQueueService = context.getBean(RabbitMQService.class);
+		RabbitMQService receiverQueueService = context.getBean(RabbitMQService.class);
+		RabbitMQService collectorQueueService = context.getBean(RabbitMQService.class);
 
 		// Get the DatabaseConnector and DatabaseConfig instances from the context
 		DatabaseConnector databaseConnector = context.getBean(DatabaseConnector.class);
-		DatabaseConfig databaseConfig = context.getBean(DatabaseConfig.class);
 
 		// Initialize the DataCollectionDispatcher instance
-		DataCollectionDispatcher dataCollectionDispatcher = new DataCollectionDispatcher(dispatcherQueueService, collectorQueueService, receiverQueueService, databaseConnector, databaseConfig);
+		DataCollectionDispatcher dataCollectionDispatcher = new DataCollectionDispatcher(dispatcherQueueService, receiverQueueService, collectorQueueService, databaseConnector);
 		dataCollectionDispatcher.init();
 	}
-
 
 	/**
 	 * Receives the data collection job from the queue and dispatches it to the correct data collector.
@@ -80,15 +75,13 @@ public class DataCollectionDispatcher {
 				String receivedMessage = new String(delivery.getBody(), "UTF-8");
 				log.info("Received message: {}", receivedMessage);
 				try {
-					receiverQueueService.initialize();
-					collectorQueueService.initialize();
 					sendMessageForEachStation(collectorQueueService, Long.parseLong(receivedMessage));
-					receiverQueueService.publishMessage(receivedMessage);
+					receiverQueueService.publishMessage(receivedMessage, Queues.DATA_COLLECTION_RECEIVER);
 				} catch (TimeoutException e) {
 					throw new RuntimeException(e);
 				}
 			};
-			dispatcherQueueService.getChannel().basicConsume(dispatcherQueueService.getQueueName(), true, deliverCallback, consumerTag -> {});
+			dispatcherQueueService.getChannel().basicConsume(Queues.SPRING_BOOT_APP.getQueueName(), true, deliverCallback, consumerTag -> {});
 		} catch (IOException e) {
 			log.error("Error in dispatching data collection job", e);
 		}
@@ -102,20 +95,19 @@ public class DataCollectionDispatcher {
 	 * @throws TimeoutException timeout while sending the message
 	 */
 	public void sendMessageForEachStation(RabbitMQService queueService, long customerId) throws IOException, TimeoutException {
-		DatabaseConfig.DataSourceProperties properties = databaseConfig.getDatasources().get("stations");
 		databaseConnector.connect("stations");
 		try (ResultSet resultSet = databaseConnector.executeSQLQuery(QUERY)) {
 			while (true) {
 				StationModel station = new StationModel();
 				if (!resultSet.next()) {
-					queueService.publishMessage("END");
+					queueService.publishMessage("END", Queues.DATA_COLLECTION_DISPATCHER);
 					break;
 				}
 				station.setId(resultSet.getLong("id"));
 				station.setDbUrl(resultSet.getString("db_url"));
 				station.setLat(resultSet.getDouble("lat"));
 				station.setLng(resultSet.getDouble("lng"));
-				queueService.publishMessage(station.toCsv() + "," + customerId);
+				queueService.publishMessage(station.toCsv() + "," + customerId, Queues.DATA_COLLECTION_DISPATCHER);
 			}
 		} catch (SQLException e) {
 			throw new RuntimeException(e);
