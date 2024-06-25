@@ -33,32 +33,24 @@ public class InvoiceGeneratorController {
     @FXML
     private  TableView<Invoice> invoiceTable;
 
-    public void initialize() {
-        invoiceTable.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
+public void initialize() {
+    invoiceTable.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
 
-        TableColumn<Invoice, String> customerIdColumn = new TableColumn<>("Customer ID");
-        customerIdColumn.setCellValueFactory(new PropertyValueFactory<>("customerId"));
+    TableColumn<Invoice, String> customerIdColumn = new TableColumn<>("Customer ID");
+    customerIdColumn.setCellValueFactory(new PropertyValueFactory<>("customerId"));
 
-        TableColumn<Invoice, Button> viewInvoiceColumn = new TableColumn<>("View Invoice");
-        viewInvoiceColumn.setCellValueFactory(new PropertyValueFactory<>("viewInvoiceButton"));
+    TableColumn<Invoice, Button> viewInvoiceColumn = new TableColumn<>("View Invoice");
+    viewInvoiceColumn.setCellValueFactory(new PropertyValueFactory<>("viewInvoiceButton"));
 
-        invoiceTable.setItems(invoices);
-
-        // Check for existing invoices in the folder and add them to the table
-        File invoiceFolder = new File("src/main/resources/files/invoice/");
-        File[] invoiceFiles = invoiceFolder.listFiles((dir, name) -> name.endsWith(".pdf"));
-        if (invoiceFiles != null) {
-            for (File invoiceFile : invoiceFiles) {
-                String customerId = invoiceFile.getName().replace(".pdf", "");
-                invoices.add(new Invoice(customerId, createViewInvoiceButton(customerId)));
-            }
-        }
-    }
+    invoiceTable.getColumns().setAll(customerIdColumn, viewInvoiceColumn);
+    invoiceTable.setItems(invoices);
+}
 
     /**
      * Generates an invoice for the customer ID entered in the text field.
      */
-    /*
+
+
     @FXML
     protected void onClickGenerateInvoice() {
         String customerId = customerIdField.getText();
@@ -70,56 +62,33 @@ public class InvoiceGeneratorController {
                 if (!isInvoiceInTable(customerId)) {
                     invoiceTable.getItems().add(new Invoice(customerId, createViewInvoiceButton(customerId)));
                 }
+                showAlert(Alert.AlertType.INFORMATION, "Information", "Invoice already exists!");
             } else {
                 try {
-                    // Assuming invoice generation logic here
-                    generateInvoice(customerId, localFilePath);
-                    if (pdfFile.exists()) {
-                        System.out.println("Invoice generated for customer ID: " + customerId);
-                        invoiceTable.getItems().add(new Invoice(customerId, createViewInvoiceButton(customerId)));
-                        showAlert(Alert.AlertType.CONFIRMATION, "Information", "Invoice generated!");
+                    URL url = new URL(BASE_URL + customerId);
+                    HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+                    connection.setRequestMethod("POST");
+                    connection.getResponseCode();
+
+                    if (connection.getResponseCode() == HttpURLConnection.HTTP_ACCEPTED) {
+                        // wait 5 seconds for the invoice to be generated
+                        Thread.sleep(5000);
+                        if (invoiceGeneratorService.getResponseGETRequest(customerId).responseCode() == HttpURLConnection.HTTP_OK) {
+                            System.out.println("Invoice generated for customer ID: " + customerId);
+                            invoiceTable.getItems().add(new Invoice(customerId, createViewInvoiceButton(customerId)));
+                            showAlert(Alert.AlertType.CONFIRMATION, "Information", "Invoice generated!");
+                        } else {
+                            System.out.println("Invoice generation failed for customer ID: " + customerId);
+                            showAlert(Alert.AlertType.ERROR, "Error", "Invoice generation failed!");
+                        }
                     } else {
                         System.out.println("Invoice generation failed for customer ID: " + customerId);
+                        showAlert(Alert.AlertType.ERROR, "Error", "Invoice generation failed!");
                     }
                 } catch (IOException | InterruptedException e) {
                     e.printStackTrace();
+                    showAlert(Alert.AlertType.ERROR, "Error", "Invoice generation failed due to an error!");
                 }
-            }
-        }
-    }
-*/
-
-    @FXML
-    protected void onClickGenerateInvoice() {
-        String customerId = customerIdField.getText();
-        if (!customerId.isEmpty()) {
-            try {
-                URL url = new URL(BASE_URL + customerId);
-                HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-                connection.setRequestMethod("POST");
-                connection.getResponseCode();
-
-                if (connection.getResponseCode() == HttpURLConnection.HTTP_ACCEPTED) {
-                    //wait 5 seconds for the invoice to be generated
-                    Thread.sleep(5000);
-                    if(invoiceGeneratorService.getResponseGETRequest(customerId).responseCode() == HttpURLConnection.HTTP_OK) {
-                        System.out.println("Invoice generated for customer ID: " + customerId);
-                    }
-                    invoiceTable.getItems().add(new Invoice(customerId, createViewInvoiceButton(customerId)));
-                    if(viewInvoice(customerId)){ // Fixed line
-                        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-                        alert.setTitle("Information");
-                        alert.setHeaderText(null);
-                        alert.setContentText("Invoice generated!");
-                        alert.showAndWait();
-                    }
-                } else {
-                    System.out.println("Invoice generation failed for customer ID: " + customerId);
-                }
-            } catch (IOException e) {
-                e.printStackTrace();
-            } catch (InterruptedException e) {
-                throw new RuntimeException(e);
             }
         }
     }
@@ -173,6 +142,7 @@ public class InvoiceGeneratorController {
         if (pdfFile.exists()) {
             try {
                 Desktop.getDesktop().open(pdfFile);
+                return true;
             } catch (IOException e) {
                 e.printStackTrace();
             }

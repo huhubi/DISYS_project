@@ -4,10 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="acea01ee-4bc4-4b4f-b3ee-342c61ac0a0b" name="Changes" comment="created comments for Unit tests and InvoiceGeneratorService.java">
-      <change beforePath="$PROJECT_DIR$/Frontend/FuelStationUI/src/main/java/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/FuelStationUI/src/main/java/module-info.java" afterDir="false" />
+    <list default="true" id="acea01ee-4bc4-4b4f-b3ee-342c61ac0a0b" name="Changes" comment="adapted InvoiceGeneratorController.java so it tries to POST a customerID when there is no pdf available in ressource">
       <change beforePath="$PROJECT_DIR$/Frontend/FuelStationUI/src/main/java/org/example/fuelstationui/InvoiceGeneratorController.java" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/FuelStationUI/src/main/java/org/example/fuelstationui/InvoiceGeneratorController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Frontend/FuelStationUI/src/main/resources/files/invoice/1.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/FuelStationUI/src/main/resources/files/invoice/1.pdf" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -76,7 +74,7 @@
     "ignore.virus.scanning.warn.message": "true",
     "ignore_missing_gitignore": "true",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/Hubi/Desktop/DISYS/StationDataCollector",
+    "last_opened_file_path": "C:/Users/Hubi/Desktop/DISYS/DataCollectionDispatcher",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -170,7 +168,7 @@
       <workItem from="1719157884067" duration="5286000" />
       <workItem from="1719161750888" duration="402000" />
       <workItem from="1719165320814" duration="1443000" />
-      <workItem from="1719310397104" duration="1965000" />
+      <workItem from="1719310397104" duration="2797000" />
     </task>
     <task id="LOCAL-00001" summary="Splitting to Frontend / Backend part of project">
       <option name="closed" value="true" />
@@ -252,7 +250,15 @@
       <option name="project" value="LOCAL" />
       <updated>1719312086572</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="adapted InvoiceGeneratorController.java so it tries to POST a customerID when there is no pdf available in ressource">
+      <option name="closed" value="true" />
+      <created>1719313799289</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1719313799289</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -270,6 +276,7 @@
     <MESSAGE value="adapted Javafx version for mac compatibility in pom.xml" />
     <MESSAGE value="created comments for Unit tests" />
     <MESSAGE value="created comments for Unit tests and InvoiceGeneratorService.java" />
-    <option name="LAST_COMMIT_MESSAGE" value="created comments for Unit tests and InvoiceGeneratorService.java" />
+    <MESSAGE value="adapted InvoiceGeneratorController.java so it tries to POST a customerID when there is no pdf available in ressource" />
+    <option name="LAST_COMMIT_MESSAGE" value="adapted InvoiceGeneratorController.java so it tries to POST a customerID when there is no pdf available in ressource" />
   </component>
 </project>
