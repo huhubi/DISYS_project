@@ -16,6 +16,7 @@ class RestEndpointTest {
     private final RestEndpoint restEndpoint = new RestEndpoint(restEndpointService);
     private final MockHttpServletResponse response = new MockHttpServletResponse();
 
+    // Test case for when the invoice is available
     @Test
     void getInvoice_returnsOk_whenInvoiceIsAvailable() {
         String customerId = "validCustomerId";
@@ -26,7 +27,7 @@ class RestEndpointTest {
         assertEquals(HttpStatus.OK, result.getStatusCode());
         verify(restEndpointService, times(1)).downloadInvoice(customerId, response);
     }
-
+    // Test case for when the invoice is not available
     @Test
     void getInvoice_returnsNotFound_whenInvoiceIsNotAvailable() {
         String customerId = "invalidCustomerId";
@@ -37,7 +38,7 @@ class RestEndpointTest {
         assertEquals(HttpStatus.NOT_FOUND, result.getStatusCode());
         verify(restEndpointService, times(1)).downloadInvoice(customerId, response);
     }
-
+    // Test case for when the customer ID is valid
     @Test
     void startDataGathering_returnsAccepted_whenCustomerIdIsValid() {
         String customerId = "validCustomerId";
@@ -48,7 +49,7 @@ class RestEndpointTest {
         assertEquals(HttpStatus.ACCEPTED, result.getStatusCode());
         verify(restEndpointService, times(1)).publishDataGatheringJob(customerId);
     }
-
+    // Test case for when the customer ID is invalid
     @Test
     void startDataGathering_returnsBadRequest_whenCustomerIdIsInvalid() {
         String customerId = "invalidCustomerId";
