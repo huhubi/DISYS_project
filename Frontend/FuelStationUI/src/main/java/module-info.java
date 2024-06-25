@@ -3,6 +3,7 @@ module org.example.fuelstationui {
     requires javafx.fxml;
 
     requires java.desktop;
+    requires java.net.http;
     // requires itextpdf; TODO: solve dependeny issue
 
     opens org.example.fuelstationui to javafx.fxml;

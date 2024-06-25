@@ -58,6 +58,7 @@ public class InvoiceGeneratorController {
     /**
      * Generates an invoice for the customer ID entered in the text field.
      */
+    /*
     @FXML
     protected void onClickGenerateInvoice() {
         String customerId = customerIdField.getText();
@@ -86,7 +87,42 @@ public class InvoiceGeneratorController {
             }
         }
     }
+*/
 
+    @FXML
+    protected void onClickGenerateInvoice() {
+        String customerId = customerIdField.getText();
+        if (!customerId.isEmpty()) {
+            try {
+                URL url = new URL(BASE_URL + customerId);
+                HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+                connection.setRequestMethod("POST");
+                connection.getResponseCode();
+
+                if (connection.getResponseCode() == HttpURLConnection.HTTP_ACCEPTED) {
+                    //wait 5 seconds for the invoice to be generated
+                    Thread.sleep(5000);
+                    if(invoiceGeneratorService.getResponseGETRequest(customerId).responseCode() == HttpURLConnection.HTTP_OK) {
+                        System.out.println("Invoice generated for customer ID: " + customerId);
+                    }
+                    invoiceTable.getItems().add(new Invoice(customerId, createViewInvoiceButton(customerId)));
+                    if(viewInvoice(customerId)){ // Fixed line
+                        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+                        alert.setTitle("Information");
+                        alert.setHeaderText(null);
+                        alert.setContentText("Invoice generated!");
+                        alert.showAndWait();
+                    }
+                } else {
+                    System.out.println("Invoice generation failed for customer ID: " + customerId);
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
+        }
+    }
     /**
      * Generates the invoice file locally.
      * @param customerId The customer ID for which the invoice should be generated.
@@ -127,9 +163,11 @@ public class InvoiceGeneratorController {
 
     /**
      * Opens the invoice for the given customer ID.
+     *
      * @param customerId The customer ID for which the invoice should be opened.
+     * @return
      */
-    private void viewInvoice(String customerId) {
+    private boolean viewInvoice(String customerId) {
         String localFilePath = "src/main/resources/files/invoice/" + customerId + ".pdf";
         File pdfFile = new File(localFilePath);
         if (pdfFile.exists()) {
@@ -141,6 +179,7 @@ public class InvoiceGeneratorController {
         } else {
             showAlert(Alert.AlertType.ERROR, "Error", "Invoice not found!");
         }
+        return false;
     }
 
     /**
